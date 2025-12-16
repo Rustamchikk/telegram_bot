@@ -17,7 +17,17 @@ from utils.user_management import (
 )
 from utils.common_utils import admin_required, handle_errors, send_message_with_fallback, format_user_list
 
-
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+def admin_keyboard():
+    return InlineKeyboardMarkup(inline_keyboard=[
+        [
+            InlineKeyboardButton(text="👥 Users", callback_data="admin_users"),
+            InlineKeyboardButton(text="📊 Stats", callback_data="admin_stats"),
+        ],
+        [
+            InlineKeyboardButton(text="📢 Broadcast", callback_data="admin_broadcast")
+        ]
+    ])
 # Set up logging
 logger = logging.getLogger(__name__)
 
@@ -26,29 +36,39 @@ class AdminActions(StatesGroup):
     waiting_for_broadcast_message = State()
 
 
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+
+
+def admin_keyboard():
+    return InlineKeyboardMarkup(inline_keyboard=[
+        [
+            InlineKeyboardButton(text="👥 Users", callback_data="admin_users"),
+            InlineKeyboardButton(text="📊 Stats", callback_data="admin_stats"),
+        ],
+        [
+            InlineKeyboardButton(text="📢 Broadcast", callback_data="admin_broadcast")
+        ]
+    ])
+
+
 @admin_required
 async def handle_admin_command(message: Message, state: FSMContext):
-    # Get basic stats
     stats = get_usage_stats()
 
-    admin_menu = f"""
-Admin Panel - FREE Version
+    text = f"""
+🛠 <b>Admin Panel</b>
 
-Statistics:
-Total Users: {stats['total_users']}
-Total Downloads: {stats['total_downloads']}
+👥 Users: {stats['total_users']}
+📥 Downloads: {stats['total_downloads']}
 
-Available Commands:
-/broadcast - Send message to all users
-/users - List users with usernames
-/stats - Show detailed statistics
-
-Note: This is the FREE version
-For paid features, check other branches:
-• channel-subscription-feature
+Quyidagi tugmalardan foydalaning 👇
 """
 
-    await message.answer(admin_menu, parse_mode="Markdown")
+    await message.answer(
+        text,
+        reply_markup=admin_keyboard(),
+        parse_mode="HTML"
+    )
 
 
 @admin_required

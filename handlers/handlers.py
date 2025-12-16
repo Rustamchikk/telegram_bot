@@ -22,7 +22,14 @@ class DownloadVideo(StatesGroup):
 async def send_welcome(message: Message, state: FSMContext):
     # Ensure user exists in database
     ensure_user_exists(message)
-    welcome_text = "👋 Hi!\n\n📥 I help you download videos and photos from Instagram, TikTok, YouTube and Pinterest —\nwithout watermarks and in the best quality!\n\n📎 Just send a link — and get video in a couple of seconds!\n\n🤖 Also check @DockMixAIbot — AI GPT + Claude assistant!"
+    welcome_text = (
+    "👋 Assalomu alaykum!\n\n"
+    "📥 Men sizga Instagram, TikTok, YouTube va Pinterest’dan "
+    "videolar hamda rasmlarni  belgisisiz va eng yuqori sifatda "
+    "yuklab beraman.\n\n"
+    "📎 Havolani yuboring — video bir necha soniya ichida tayyor bo‘ladi!"
+)
+
 
     await message.answer(welcome_text, parse_mode="Markdown")
 
@@ -64,16 +71,18 @@ def register_handlers(dp):
     from aiogram.filters import Command
     from aiogram import F
 
-    # Commands
     dp.message.register(send_welcome, Command("start"))
 
-    # Video link processing (any message that contains URLs)
     dp.message.register(process_video_link, F.text.regexp(r'https?://'))
 
-    # Fallback for other messages
-    dp.message.register(send_welcome)
+    # Fallback faqat oddiy matnlar uchun
+    dp.message.register(
+        send_welcome,
+        F.text & ~F.text.startswith("/")
+    )
 
     print("Main handlers registered")
+
 
 
 # Export functions for main router
