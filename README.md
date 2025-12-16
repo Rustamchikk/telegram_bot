@@ -1,43 +1,41 @@
-# Telegram_bot 🤖
+# Telegram_bot 
 
-**Simple bot for downloading videos from social media**
+**Ijtimoiy tarmoqlardan videolarni yuklab olish uchun oddiy bot**
 
-## What can the bot do?
+## Bot nimalarni qila oladi?
 
-- Downloads videos from 8 popular platforms
-- Sends videos in two formats (video + file)
-- No download limits
-- No payments or subscriptions required
-- Simple and clean interface
+- 8 ta mashhur platformadan videolarni yuklab oladi
+- Videolarni 2 xil formatda yuboradi (video + fayl)
+- Yuklab olishda cheklovlar yo‘q
+- To‘lovlar yoki obuna talab qilinmaydi
+- Oddiy va qulay interfeys
 
-## Supported platforms:
+## Qo‘llab-quvvatlanadigan platformalar:
 YouTube • Instagram • TikTok • Facebook • Twitter • Pinterest • Reddit • Vimeo
 
 ---
 
-## How to use?
+## Qanday foydalaniladi?
 
-1. **Find a video link** on any supported platform
-2. **Send the link to the bot** in Telegram
-3. **Get your video** in two formats:
-   - 🎥 Video (for watching)
-   - 📁 File (for downloading)
+1. **Qo‘llab-quvvatlanadigan**platformalardan biridan video havolasini toping
+2. **Havolani Telegram botiga yuboring**
+3. **Videoni ikki xil formatda oling:** 
+   - 🎥 Video (ko‘rish uchun)
+   - 📁 Fayl (yuklab olish uchun)
 
-That's it! 😊
+Shu bilan tamom! 😊
 
-## Bot commands:
-/start - Start using the bot
+## Bot buyruqlari:
+/start - Botni ishga tushirish
 
-## For developers
+## Dasturchilar uchun
 
-If you want to run the bot yourself:
+gar botni o‘zingiz ishga tushirmoqchi bo‘lsangiz:
 
 1. **Install Python 3.8+**
 2. **Clone the repository:**
    ```bash
-   git clone https://github.com/zerox9dev/Vidzilla.git
-   cd Vidzilla
-   ```
+   git clone https://github.com/.......
 
 3. **Install dependencies:**
    ```bash
