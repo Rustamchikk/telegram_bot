@@ -38,33 +38,16 @@ class SimpleVideoDownloader:
     def get_simple_ytdlp_options(self, output_path: str) -> dict:
         return {
             'outtmpl': output_path,
-            'format': 'best[ext=mp4]/best',
-            
-            # Instagram va boshqa platformalar uchun muhim
-            'http_headers': {
-                'User-Agent': get_random_user_agent()
-            },
-
-            # 🔥 ENG MUHIM QISM — Instagram cookies
-            'cookiefile': 'cookies/instagram.txt',
-
-            # Xatolarni kamaytirish
-            'ignoreerrors': False,
-            'no_warnings': True,
-            'quiet': True,
-
-            # Keraksiz fayllarni o‘chiramiz
+            'format': 'best[ext=mp4]/best/worst',  # Simple format selection
             'writeinfojson': False,
             'writesubtitles': False,
-            'writeautomaticsub': False,
+            'ignoreerrors': False,
+            'no_warnings': False,
+            'http_headers': {'User-Agent': get_random_user_agent()},
+            'extract_flat': False,
             'writethumbnail': False,
-
-            # SSL va tekshiruvlar
-            'nocheckcertificate': True,
-
-            # Playlist bo‘lsa ham faqat bitta video
-            'noplaylist': True,
-    }
+            'writeautomaticsub': False,
+        }
 
     async def download_video(self, url: str, platform_name: str, user_id: int) -> Optional[str]:
         request_id = str(uuid.uuid4())[:8]
