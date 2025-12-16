@@ -9,7 +9,17 @@ from aiogram import Bot, Dispatcher
 from aiogram.webhook.aiohttp_server import SimpleRequestHandler, setup_application
 from aiohttp import web
 
-from config import BOT_TOKEN, WEBHOOK_PATH, WEBHOOK_URL, PORT, HOST
+from config import (
+    BOT_TOKEN,
+    WEBHOOK_PATH,
+    WEBHOOK_URL,
+    PORT,
+    HOST,
+    ADMIN_IDS,
+    MONGODB_URI,
+    MONGODB_DB_NAME,
+)
+
 
 from handlers.handlers import register_handlers
 from handlers.admin import register_admin_handlers
