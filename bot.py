@@ -33,7 +33,21 @@ print("==================================")
 missing = [var for var in required_vars if not os.getenv(var)]
 if missing:
     raise ValueError(f"Missing environment variables: {', '.join(missing)}")
+# Bot.py ning boshiga quyidagini qo'shing
+print("=== DEBUG ALL VARIABLES ===")
+print(f"BOT_TOKEN type: {type(BOT_TOKEN)}, value: {BOT_TOKEN[:10]}..." if BOT_TOKEN else "BOT_TOKEN: None")
+print(f"ADMIN_IDS type: {type(ADMIN_IDS)}, value: {ADMIN_IDS}")
+print(f"MONGODB_URI type: {type(MONGODB_URI)}, value: {MONGODB_URI[:30]}...")
+print(f"MONGODB_DB_NAME type: {type(MONGODB_DB_NAME)}, value: {MONGODB_DB_NAME}")
+print("===========================")
 
+# Va kodda iteratsiya qilinadigan joylarni tekshiring
+if ADMIN_IDS:
+    print(f"Trying to iterate ADMIN_IDS: {ADMIN_IDS}")
+    # Iteratsiya qilishdan oldin tekshirish
+    if isinstance(ADMIN_IDS, str):
+        admin_list = ADMIN_IDS.split(",")
+        print(f"Admin list: {admin_list}")
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
