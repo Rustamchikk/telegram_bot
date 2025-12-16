@@ -2,6 +2,7 @@
 
 import asyncio
 import logging
+import os
 from typing import Dict, Any
 
 from aiogram import Bot, Dispatcher
@@ -12,6 +13,26 @@ from config import BOT_TOKEN, WEBHOOK_PATH, WEBHOOK_URL, PORT, HOST
 
 from handlers.handlers import register_handlers
 from handlers.admin import register_admin_handlers
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Barcha environment variables ni tekshirish
+required_vars = ["BOT_TOKEN", "ADMIN_IDS", "MONGODB_URI", "MONGODB_DB_NAME"]
+
+print("=== ENVIRONMENT VARIABLES CHECK ===")
+for var in required_vars:
+    value = os.getenv(var)
+    status = "✅ SET" if value else "❌ NOT SET"
+    print(f"{var}: {status}")
+    if value:
+        print(f"   Value: {value[:20]}..." if len(value) > 20 else f"   Value: {value}")
+print("==================================")
+
+# Agar biror biri yo'q bo'lsa, dasturni to'xtatish
+missing = [var for var in required_vars if not os.getenv(var)]
+if missing:
+    raise ValueError(f"Missing environment variables: {', '.join(missing)}")
 
 # Configure logging
 logging.basicConfig(
