@@ -34,7 +34,7 @@ async def send_welcome(message: Message, state: FSMContext):
     await message.answer(welcome_text, parse_mode="Markdown")
 
 
-@handle_errors("Error\nTry another link")
+@handle_errors("Yuklashda xatolik yuz berdi")
 async def process_video_link(message: Message, state: FSMContext):
     # Ensure user exists in database
     user = ensure_user_exists(message)
@@ -46,7 +46,7 @@ async def process_video_link(message: Message, state: FSMContext):
         return
 
     # Send processing message
-    progress_msg = await message.answer("Loading...")
+    progress_msg = await message.answer("Yuklanmoqda...")
 
     # Detect platform and process video
     platform_detected = await detect_platform_and_process(
@@ -76,10 +76,7 @@ def register_handlers(dp):
     dp.message.register(process_video_link, F.text.regexp(r'https?://'))
 
     # Fallback faqat oddiy matnlar uchun
-    dp.message.register(
-        send_welcome,
-        F.text & ~F.text.startswith("/")
-    )
+    dp.message.register(send_welcome)
 
     print("Main handlers registered")
 

@@ -120,20 +120,20 @@ async def process_social_media_video(message, bot, url, platform_name, progress_
             if progress_msg:
                 await safe_edit_message(progress_msg, size_limit_message)
             else:
-                await bot.send_message(message.chat.id, size_limit_message)
+                await bot._message(message.chat.id, size_limit_message)
 
             logger.info(f"{platform_name} video too large: {file_size_mb:.2f}MB > {TELEGRAM_VIDEO_SIZE_LIMIT_MB}MB")
             return
 
         if progress_msg:
-            await safe_edit_message(progress_msg, f"Sending video & document...")
+            await safe_edit_message(progress_msg, f"Video va fayl yuborilmoqda...")
 
         # Send video and document in media group (it's within size limit)
         await send_video_with_fallback(bot, message, temp_video_path, platform_name)
 
         # Success message
         if progress_msg:
-            await safe_edit_message(progress_msg, f"Sent video & document! ({file_size_mb:.1f}MB)")
+            await safe_edit_message(progress_msg, f"Video va fayl tayyor! ({file_size_mb:.1f}MB)")
 
         logger.info(f"{platform_name} video processed successfully")
 
@@ -141,7 +141,7 @@ async def process_social_media_video(message, bot, url, platform_name, progress_
         logger.error(f"Error processing {platform_name} video: {str(e)}")
 
         # Simple error message
-        error_message = "Error\nTry another link"
+        error_message = "Yuklashda xatolik yuz berdi"
 
         if progress_msg:
             await safe_edit_message(progress_msg, error_message)
